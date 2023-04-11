@@ -4,19 +4,11 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-
-    public class Lead
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public string Email { get; set; }
-        public DataTime Data { get; set; }
-
-
     public class LeadController : ControllerBase
     {
         private static readonly LeadRequest[] Leads = new LeadRequest[]
         {
-            new LeadRequest{ Nome="jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento"02/05/1991"},
+            new LeadRequest{ Nome="jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
            
         };
 
