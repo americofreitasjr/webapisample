@@ -4,28 +4,36 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LogonController : ControllerBase
+
+    public class Lead
+        public string Nome { get; set; }
+        public string Sobrenome { get; set; }
+        public string Email { get; set; }
+        public DataTime Data { get; set; }
+
+
+    public class LeadController : ControllerBase
     {
-        private static readonly LogonRequest[] Logons = new LogonRequest[]
+        private static readonly LeadRequest[] Leads = new LeadRequest[]
         {
-            new LogonRequest{ Username="jr",Password="123456"},
-            new LogonRequest{ Username="thayna",Password="123"},
+            new LeadRequest{ Nome="jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento"02/05/1991"},
+           
         };
 
-        private readonly ILogger<LogonController> _logger;
+        private readonly ILogger<LeadController> _logger;
 
-        public LogonController(ILogger<LogonController> logger)
+        public LeadController(ILogger<LeadController> logger)
         {
             _logger = logger;
         }
 
         [HttpPost] 
-        public ActionResult<LogonResponse> Post(LogonRequest req)
+        public ActionResult<LeadResponse> Post(LeadRequest req)
         {
-            var logado = Logons.Any(w => w.Username == req.Username && w.Password == req.Password);
+            var logado = Leads.Any(w => w.Nome == req.Nome && w.Sobrenome == req.Sobrenome && w.Email == req.Email && w.DataNascimento == req.Datanascimento);
 
-            var response = new LogonResponse() {
-                Username = req.Username,
+            var response = new LeadResponse() {
+                Nome = req.,
                 Logado = logado,
                 Data = DateTime.Now,
             };
