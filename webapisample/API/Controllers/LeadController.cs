@@ -8,7 +8,7 @@ namespace API.Controllers
     {
         private static readonly LeadRequest[] Leads = new LeadRequest[]
         {
-            new LeadRequest{ Nome="jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
+            new LeadRequest{ Nome = "jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
            
         };
 
@@ -19,7 +19,15 @@ namespace API.Controllers
             _logger = logger;
         }
 
-        [HttpPost] 
+        [HttpGet(Name = "LeadController")]
+        public IEnumerable<Lead> Get() {
+            return Enumerable.Range(1, 5).Select(index => new Lead {
+                Lead = Leads[Random.Shared.Next(Leads.Length)]
+            })
+            .ToArray();
+
+
+            [HttpPost] 
         public ActionResult<LeadResponse> Post(LeadRequest req)
         {
             var logado = Leads.Any(w => w.Nome == req.Nome && w.Sobrenome == req.Sobrenome && w.Email == req.Email && w.DataNascimento == req.Datanascimento);
@@ -32,5 +40,7 @@ namespace API.Controllers
 
             return Ok(response);
         }
+    }
+
     }
 }
