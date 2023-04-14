@@ -6,7 +6,7 @@ namespace API.Controllers
     [Route("[controller]")]
     public class LeadController : ControllerBase
     {
-        private static readonly LeadRequest[] Leads = new LeadRequest[]
+        private static readonly LeadRequest[] CapDeLeads = new LeadRequest[]
         {
             new LeadRequest{ Nome = "jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
 
@@ -23,7 +23,7 @@ namespace API.Controllers
         public IEnumerable<Lead> Get() 
         {
             return Enumerable.Range(1, 5).Select(index => new Lead {
-                Lead = Leads[Random.Shared.Next(Leads.Length)]
+                CapDeLead = CapDeLeads[Random.Shared.Next(CapDeLeads.Length)]
             })
             .ToArray();
         }
