@@ -2,8 +2,8 @@ namespace API
 {
     public class LeadResponse
     {
-        public string Username { get; set; }
-        public DateTime Data { get; set; }
-        public bool Logado { get; set; }
+        public string Nome { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public bool Captado { get; set; } 
     }
 }

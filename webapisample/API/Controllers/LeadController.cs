@@ -27,7 +27,20 @@ namespace API.Controllers
             })
             .ToArray();
         }
+        [HttpPost]
+        public ActionResult<LeadResponse> Post(LeadRequest req) 
+        {
+          var captado = CapDeLeads.Any(w => w.Nome == req.Nome && w.Sobrenome == req.Sobrenome 
+          && w.Email == req.Email && w.DataNascimento == req.DataNascimento);
 
+            var response = new LeadResponse() {
+                Nome = req.Nome,
+                Captado = captado,
+                DataNascimento = DateTime.Now,
+            };
+
+            return Ok(response);
+        }
 
 
     }
