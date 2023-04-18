@@ -20,12 +20,10 @@ namespace API.Controllers
         }
 
         [HttpGet(Name = "LeadController")]
-        public IEnumerable<Lead> Get() 
+        public IEnumerable<LeadController> Get() 
         {
-            return Enumerable.Range(1, 5).Select(index => new Lead {
-                CapDeLead = CapDeLeads[Random.Shared.Next(CapDeLeads.Length)]
-            })
-            .ToArray();
+            return (IEnumerable<LeadController>)CapDeLeads.ToList();
+
         }
         [HttpPost]
         public ActionResult<LeadResponse> Post(LeadRequest req) 
