@@ -20,9 +20,9 @@ namespace API.Controllers
         }
 
         [HttpGet(Name = "LeadController")]
-        public IEnumerable<LeadController> Get() 
+        public IEnumerable<Lead> Get() 
         {
-            return (IEnumerable<LeadController>)CapDeLeads.ToList();
+            return (IEnumerable<Lead>)CapDeLeads.ToList();
 
         }
         [HttpPost]
