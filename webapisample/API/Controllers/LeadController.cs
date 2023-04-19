@@ -6,9 +6,9 @@ namespace API.Controllers
     [Route("[controller]")]
     public class LeadController : ControllerBase
     {
-        private static readonly LeadRequest[] CapDeLeads = new LeadRequest[]
+        private static readonly Lead[] CapDeLeads = new Lead[]
         {
-            new LeadRequest{ Nome = "jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
+            new Lead{ Nome = "jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
 
         };
 
@@ -26,15 +26,15 @@ namespace API.Controllers
 
         }
         [HttpPost]
-        public ActionResult<LeadResponse> Post(LeadRequest req) 
+        public ActionResult<Lead> Post(Lead req) 
         {
           var captado = CapDeLeads.Any(w => w.Nome == req.Nome && w.Sobrenome == req.Sobrenome 
           && w.Email == req.Email && w.DataNascimento == req.DataNascimento);
 
-            var response = new LeadResponse() {
+            var response = new Lead() {
                 Nome = req.Nome,
                 Captado = captado,
-                DataNascimento = DateTime.Now,
+               
             };
 
             return Ok(response);
