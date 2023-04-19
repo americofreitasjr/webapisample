@@ -25,9 +25,9 @@ namespace API.Controllers
             return (IEnumerable<Lead>)CapDeLeads.ToList();
 
         }
+
         [HttpPost]
-        public ActionResult<Lead> Post(Lead req) 
-        {
+        public ActionResult<Lead> Post(Lead req) {
           var captado = CapDeLeads.Any(w => w.Nome == req.Nome && w.Sobrenome == req.Sobrenome 
           && w.Email == req.Email && w.DataNascimento == req.DataNascimento);
 
@@ -44,5 +44,5 @@ namespace API.Controllers
     }
      
 
-        }
+ }
    
