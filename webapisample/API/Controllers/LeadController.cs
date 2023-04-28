@@ -8,7 +8,7 @@ namespace API.Controllers
     {
         private static readonly Lead[] CapDeLeads = new Lead[]
         {
-            new Lead{ Nome = "jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento="02/05/1991"},
+            new Lead{ Nome = "jr",Sobrenome="Silva", Email="campostay@gmail.com", DataNascimento=new DateTime(1991, 05, 02)},  
 
         };
 
@@ -34,7 +34,8 @@ namespace API.Controllers
             var response = new Lead() {
                 Nome = req.Nome,
                 Captado = captado,
-               
+                DataNascimento = DateTime.Now 
+
             };
 
             return Ok(response);
