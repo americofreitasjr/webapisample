@@ -29,7 +29,7 @@ namespace API.Controllers
 
         [HttpPost]
         public ActionResult<Lead> Post(Lead req) {
-            string mensagem = $"Olá {req.Nome} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
+            string mensagem = $"Olá {req.Nome} {req.Sobrenome} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
             return Ok(mensagem); 
         }
 
