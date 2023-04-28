@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Controllers 
 {
@@ -28,17 +29,8 @@ namespace API.Controllers
 
         [HttpPost]
         public ActionResult<Lead> Post(Lead req) {
-          var captado = CapDeLeads.Any(w => w.Nome == req.Nome && w.Sobrenome == req.Sobrenome 
-          && w.Email == req.Email && w.DataNascimento == req.DataNascimento);
-
-            var response = new Lead() {
-                Nome = req.Nome,
-                Captado = captado,
-                DataNascimento = DateTime.Now 
-
-            };
-
-            return Ok(response);
+            string mensagem = $"Olá {req.Nome} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
+            return Ok(mensagem); 
         }
 
 
