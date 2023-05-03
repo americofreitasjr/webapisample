@@ -9,6 +9,7 @@ namespace API
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; } 
         public bool Captado { get; set; }
+        public string Genero { get; set; } 
 
     }
 }
