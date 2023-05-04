@@ -11,5 +11,6 @@ namespace API
         public bool Captado { get; set; }
         public string Genero { get; set; } 
 
+
     }
 }

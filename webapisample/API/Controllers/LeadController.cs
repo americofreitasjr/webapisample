@@ -30,13 +30,18 @@ namespace API.Controllers
         [HttpPost]
         public ActionResult<Lead> Post(Lead req) {
             //Se for M é Sr, se for F Sra
-            
+
+            var idade = Math.Abs(Math.Round(((new DateTime(1985, 06, 16) - DateTime.Now).TotalDays / 365.25d), 0));
+
+            Console.WriteLine(idade);
+
             if (req.Genero == "M") {
-                string mensagem = $"Olá Sr {req.Nome} {req.Sobrenome} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
+                string mensagem = $"Olá Sr {req.Nome} {req.Sobrenome} ({idade}) Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
                 return Ok(mensagem);
             } else if (req.Genero == "F") {
                 string mensagem = $"Olá Sra {req.Nome} {req.Sobrenome} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
                 return Ok(mensagem);
+
              }
 
              return Ok(); 
