@@ -30,16 +30,19 @@ namespace API.Controllers {
             double idade = Calcularidade(req);
 
             Console.WriteLine(idade);
-
+            // Se idade menor que 18 devolver mensagem
+            if (idade < 18 ) {
+                string mensagem = $"Você possui ({idade} anos) e essa idade é abaixo da permitida para se cadastrar.";
+                return Ok(mensagem);
+            } 
+            
             if (req.Genero == "M") {
                 string mensagem = $"Olá Sr {req.Nome} {req.Sobrenome} ({idade} anos) Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
                 return Ok(mensagem);
+
             } else if (req.Genero == "F") {
                 string mensagem = $"Olá Sra {req.Nome} {req.Sobrenome} ({idade} anos) Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
-                return Ok(mensagem);
-
             }
-
             return Ok();
 
             static double Calcularidade(Lead req) { 
