@@ -24,6 +24,55 @@ namespace API.Controllers {
 
         }
 
+        static double CalcularIdade(Lead req) {
+            return Math.Abs(Math.Round((req.DataNascimento - DateTime.Now).TotalDays / 365.25d, 0));
+
+        }
+
+        static string TraduzirDiaSemana(Lead req, string diaSemana) {
+            switch (req.DataNascimento.DayOfWeek.ToString()) {
+                case "Sunday":
+                    diaSemana = "Domingo";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+                case "Monday":
+                    diaSemana = "Segunda-Feira";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+                case "Tuesday":
+                    diaSemana = "Terça-Feira";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+                case "Wednesday":
+                    diaSemana = "Quarta-Feira";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+                case "Thursday":
+                    diaSemana = "Quinta-Feira";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+                case "Friday":
+                    diaSemana = "Sexta-Feira";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+                case "Saturday":
+                    diaSemana = "Sábado";
+                    Console.WriteLine($"Measured value is {diaSemana}");
+                    break;
+
+
+            }
+
+            return diaSemana;
+        }
+
+
         [HttpPost]
         public ActionResult<Lead> Post(Lead req) {
             //Se for M é Sr, se for F Sra
@@ -49,53 +98,7 @@ namespace API.Controllers {
             }
             return Ok();
 
-            static double CalcularIdade(Lead req) {
-                return Math.Abs(Math.Round((req.DataNascimento - DateTime.Now).TotalDays / 365.25d, 0));
-
-            }
-
-            static string TraduzirDiaSemana(Lead req, string diaSemana) {
-                switch (req.DataNascimento.DayOfWeek.ToString()) {
-                    case "Sunday":
-                        diaSemana = "Domingo";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-                    case "Monday":
-                        diaSemana = "Segunda-Feira";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-                    case "Tuesday":
-                        diaSemana = "Terça-Feira";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-                    case "Wednesday":
-                        diaSemana = "Quarta-Feira";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-                    case "Thursday":
-                        diaSemana = "Quinta-Feira";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-                    case "Friday":
-                        diaSemana = "Sexta-Feira";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-                    case "Saturday":
-                        diaSemana = "Sábado";
-                        Console.WriteLine($"Measured value is {diaSemana}");
-                        break;
-
-
-                }
-
-                return diaSemana;
-            }
+            
         }
 
 
