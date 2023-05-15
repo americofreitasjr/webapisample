@@ -24,12 +24,12 @@ namespace API.Controllers {
 
         }
 
-        static double CalcularIdade(Lead req) {
+        private double CalcularIdade(Lead req) {
             return Math.Abs(Math.Round((req.DataNascimento - DateTime.Now).TotalDays / 365.25d, 0));
 
         }
 
-        static string TraduzirDiaSemana(Lead req, string diaSemana) {
+        private string TraduzirDiaSemana(Lead req, string diaSemana) {
             switch (req.DataNascimento.DayOfWeek.ToString()) {
                 case "Sunday":
                     diaSemana = "Domingo";
