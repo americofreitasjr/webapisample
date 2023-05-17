@@ -98,7 +98,23 @@ namespace API.Controllers {
 
         private double CalcularIMC(double peso, double altura) {
             return ((peso / (altura * altura)));
+        }
 
+        private string ClassificarIMC (double peso, double altura) {
+            if (peso / (altura * altura) <= 18.5) {
+                string mensagem = "Magreza";
+
+            } else if (peso / (altura * altura) >= 18.6) {
+                string mensagem = "Normal";
+            } else if (peso / (altura * altura) >= 25.0) {
+                string mensagem = "Sobrepeso";
+            }else if (peso / (altura * altura) >= 30.0) {
+                string mensagem = "Obesidade";
+            }else if (peso / (altura * altura) >= 40.0) {
+                string mensagem = "Obesidade Grave";
+            }
+            return "";
+            
         }
 
 
