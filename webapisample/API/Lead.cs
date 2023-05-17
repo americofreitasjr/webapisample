@@ -10,6 +10,8 @@ namespace API
         public DateTime  DataNascimento { get; set; } 
         public bool Captado { get; set; }
         public string Genero { get; set; } 
+        public double Peso { get; set; }
+        public double Altura { get; set; }
 
     }
 }
