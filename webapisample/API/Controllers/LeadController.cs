@@ -25,7 +25,7 @@ namespace API.Controllers {
 
         }
 
-        
+
         [HttpPost]
         public ActionResult<Lead> Post(Lead req) {
             double idade = CalcularIdade(req);
@@ -39,7 +39,7 @@ namespace API.Controllers {
 
             string mensagem = DefinirMensagemResposta(req, diaSemana, idade);
 
-            return Ok (mensagem); 
+            return Ok(mensagem);
         }
 
         private double CalcularIdade(Lead req) {
@@ -93,9 +93,16 @@ namespace API.Controllers {
                 string mensagem = $"Olá Sra {req.Nome} {req.Sobrenome} ({idade} anos) {diaSemana} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
                 return mensagem;
             }
-            return ""; 
+            return "";
         }
+
+        private double CalcularIMC(double peso, double altura) {
+            return ((peso / (altura * altura)));
+
+        }
+
+
     }
 
-    
+
 }
