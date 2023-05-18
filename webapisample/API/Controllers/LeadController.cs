@@ -28,14 +28,14 @@ namespace API.Controllers {
 
         [HttpPost]
         public ActionResult<Lead> Post(Lead req) {
-            double idade = CalcularIdade(req);
+            double idade = CalcularIdade(req.DataNascimento);
 
             // Se idade menor que 18 devolver mensagem
             if (idade < 18) {
                 return Ok($"Você possui ({idade} anos) e essa idade é abaixo da permitida para se cadastrar.");
             }
 
-            string diaSemana = TraduzirDiaSemana(req);
+            string diaSemana = TraduzirDiaSemana(req.DataNascimento.DayOfWeek.ToString());
 
             //Imc = cálculo base altura e peso;
             var imc = CalcularIMC(req.Peso,req.Altura);
@@ -44,20 +44,18 @@ namespace API.Controllers {
             //Mensagem = mensagematual com classificacaoimc;
             string mensagem = DefinirMensagemResposta(req, diaSemana, idade, classificacaoimc);
 
-            
-
             return Ok(mensagem);
         }
 
-        private double CalcularIdade(Lead req) {
-            return Math.Abs(Math.Round((req.DataNascimento - DateTime.Now).TotalDays / 365.25d, 0));
+        private double CalcularIdade(DateTime dataNascimento) {
+            return Math.Abs(Math.Round((dataNascimento - DateTime.Now).TotalDays / 365.25d, 0));
 
         }
 
-        private string TraduzirDiaSemana(Lead req) {
+        private string TraduzirDiaSemana(string dayOfWeek) {
             string diaSemana = "";
 
-            switch (req.DataNascimento.DayOfWeek.ToString()) {
+            switch (dayOfWeek) {
                 case "Sunday":
                     diaSemana = "Domingo";
                     break;
