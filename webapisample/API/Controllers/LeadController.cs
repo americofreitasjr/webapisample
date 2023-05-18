@@ -37,7 +37,14 @@ namespace API.Controllers {
 
             string diaSemana = TraduzirDiaSemana(req);
 
-            string mensagem = DefinirMensagemResposta(req, diaSemana, idade);
+            //Imc = cálculo base altura e peso;
+            var imc = CalcularIMC(req.Peso,req.Altura);
+            //Classificacaoimc = ClassificarIMC base imc;
+            var classificacaoimc = ClassificarIMC(imc);
+            //Mensagem = mensagematual com classificacaoimc;
+            string mensagem = DefinirMensagemResposta(req, diaSemana, idade, classificacaoimc);
+
+            
 
             return Ok(mensagem);
         }
@@ -83,17 +90,25 @@ namespace API.Controllers {
         }
 
 
-        private string DefinirMensagemResposta(Lead req, string diaSemana, double idade) {
+        private string DefinirMensagemResposta(Lead req, string diaSemana, double idade, string classificacaoIMC) {
             //Se for M é Sr, se for F Sra
-            if (req.Genero == "M") {
-                string mensagem = $"Olá Sr {req.Nome} {req.Sobrenome} ({idade} anos) {diaSemana} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
-                return mensagem;
+            string tratamento;
 
-            } else if (req.Genero == "F") {
-                string mensagem = $"Olá Sra {req.Nome} {req.Sobrenome} ({idade} anos) {diaSemana} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}";
-                return mensagem;
+            switch (req.Genero) {
+                case "M":
+                    tratamento = "Sr";
+                    break;
+                case "F":
+                    tratamento = "Sra";
+                    break;
+                default:
+                    tratamento = "";
+                    break;
             }
-            return "";
+
+            string mensagem = $"Olá {tratamento} {req.Nome} {req.Sobrenome} ({idade} anos) {diaSemana} Obrigado por se cadastrar. Você receberá uma confirmação pelo e-mail {req.Email}. Classificação IMC: {classificacaoIMC}";
+
+            return mensagem;
         }
 
         private double CalcularIMC(double peso, double altura) {
