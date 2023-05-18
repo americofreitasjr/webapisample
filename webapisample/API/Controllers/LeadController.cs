@@ -99,24 +99,51 @@ namespace API.Controllers {
         private double CalcularIMC(double peso, double altura) {
             return ((peso / (altura * altura)));
         }
+        //- string mensagem desnecessário. return “OBESO”; - FEITO.
+        //- if(){} tem chaves - FEITO.
+        //- você está errando em calcular o IMC duas vezes - FEITO.
+        //- o parâmetro de ClassificarIMC é o imc(double) - FEITO.
 
-        private string ClassificarIMC (double peso, double altura) {
-            if (peso / (altura * altura) <= 18.5) {
-                string mensagem = "Magreza";
-
-            } else if (peso / (altura * altura) >= 18.6) {
-                string mensagem = "Normal";
-            } else if (peso / (altura * altura) >= 25.0) {
-                string mensagem = "Sobrepeso";
-            }else if (peso / (altura * altura) >= 30.0) {
-                string mensagem = "Obesidade";
-            }else if (peso / (altura * altura) >= 40.0) {
-                string mensagem = "Obesidade Grave";
+        private string ClassificarIMC(double peso, double altura) {
+            //Se imc < 18.5 retorna “MAGREZA”
+            //Senão Se imc >= 18.5 e imc <=24.9 retorna “NORMAL”
+            //Senão Se imc >= 25.0 e imc <= 29.9 retorna “SOBREPESO”
+            //Senão Se imc >= 30.0 e imc <= 39.9 retorna “OBESIDADE”
+            //Senão Se imc > 40.0 retorna “OBESIDADE GRAVE”
+            double IMC = (peso / (altura * altura));
+            if (IMC < 18.5) {
+                return "Magreza";
+            } else if (IMC >= 18.5 &&  IMC <= 24.9) {
+                return "Normal";
+            } else if (IMC >= 25.0 && IMC <= 29.9) {
+                return "Sobrepeso";
+            } else if (IMC >= 30.0 && IMC <= 39.9) {
+                return "Obesidade";
+            } else if (IMC >= 40.0) {
+                return "Obesidade Grave";
             }
             return "";
-            
-        }
 
+        }
+        private string DefinirMensagemRespostaIMC (Lead req, double IMC) {
+            if ( IMC >= 18.5 && IMC <= 24.9) {
+                string mensagem = "Sua classificação de IMC é Magreza e seu grau de obesidade é 0";
+                return mensagem;
+            } else if (IMC >= 25.0 && IMC <= 29.9) {
+                string mensagem = "Sua classificação de IMC é Normal e seu grau de obesidade é 0";
+                return mensagem;
+            } else if (IMC >= 25.0 && IMC <= 29.9) {
+                string mensagem = "Sua classificação de IMC é Sobrepeso e seu grau de obesidade é 1";
+                return mensagem;
+            } else if (IMC >= 30.0 && IMC <= 39.9) {
+                string mensagem = "Sua classificação de IMC é Obesidade e seu grau de obesidade é 2";
+                return mensagem;
+            } else if (IMC >= 40.0) {
+                string mensagem = "Sua classificação de IMC é Obesidade Grave e seu grau de obesidade é 3";
+                return mensagem;
+            }
+            return "";
+        }
 
     }
 
