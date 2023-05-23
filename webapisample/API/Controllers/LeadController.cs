@@ -40,10 +40,10 @@ namespace API.Controllers {
             //Imc = cálculo base altura e peso;
             var imc = CalcularIMC(req.Peso, req.Altura);
             //Classificacaoimc = ClassificarIMC base imc;
-            var classificacaoimc = ClassificarIMC(imc);
+            var classificacaoIMC = ClassificarIMC(imc);
             //Mensagem = mensagematual com classificacaoimc;
-            var classificacaorenda = ClassificarRendaFamiliar(req.RendaFamiliar);
-            string mensagem = DefinirMensagemResposta(req, diaSemana, idade, classificacaoimc, classificacaorenda);
+            var classificacaoRenda = ClassificarRendaFamiliar(req.RendaFamiliar);
+            string mensagem = DefinirMensagemResposta(req, diaSemana, idade, classificacaoIMC, classificacaoRenda);
 
             return Ok(mensagem);
         }
@@ -89,7 +89,7 @@ namespace API.Controllers {
         }
 
 
-        private string DefinirMensagemResposta(Lead req, string diaSemana, double idade, string classificacaoIMC, string classificacaorenda) {
+        private string DefinirMensagemResposta(Lead req, string diaSemana, double idade, string classificacaoIMC, string classificacaoRenda) {
             //Se for M é Sr, se for F Sra
             string tratamento;
 
@@ -106,7 +106,7 @@ namespace API.Controllers {
             }
 
             string mensagem = $"Olá {tratamento} {req.Nome} {req.Sobrenome} ({idade} anos) {diaSemana} Obrigado por se cadastrar. " +
-         $"Você receberá uma confirmação pelo e-mail {req.Email}. Classificação IMC: {classificacaoIMC}. sua renda mensal é {classificacaorenda}";
+         $"Você receberá uma confirmação pelo e-mail {req.Email}. Classificação IMC: {classificacaoIMC}. sua renda mensal é {classificacaoRenda}";
 
             return mensagem;
         }
@@ -145,14 +145,14 @@ namespace API.Controllers {
         //    Entre R$ 2500,00 e R$ 5999,00
         //    Maior que R$ 6000,00
 
-        private string ClassificarRendaFamiliar(double RendaFamiliar) {
-            if (RendaFamiliar <= 999.00) {
+        private string ClassificarRendaFamiliar(double rendaFamiliar) {
+            if (rendaFamiliar <= 999.00) {
                 return "de R$ 0 até R$ 999,00";
-            } else if (RendaFamiliar >= 1000.00 && RendaFamiliar <= 2499.00) {
+            } else if (rendaFamiliar >= 1000.00 && rendaFamiliar <= 2499.00) {
                 return "entre R$ 1000,00 e R$ 2499,00";
-            } else if (RendaFamiliar >= 2500.00 && RendaFamiliar <= 5999.00) {
+            } else if (rendaFamiliar >= 2500.00 && rendaFamiliar <= 5999.00) {
                 return "entre R$ 2500,00 e R$ 5999,00";
-            } else if (RendaFamiliar >= 6000.00) {
+            } else if (rendaFamiliar >= 6000.00) {
                 return "maior que R$ 6000,00";
             }
             return "";
