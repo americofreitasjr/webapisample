@@ -37,11 +37,11 @@ namespace API.Controllers {
         //Base de cálculo é a renda Tributável
         //Na primeira versão, você precisa retornar o valor do imposto com base nesta tabela
         public ActionResult<DeclaracaoIR> Post(DeclaracaoIR req) {
-            var deducao = DefinirLimiteDeducao(req.RendaTributavel);
+            var limiteDeducao = DefinirLimiteDeducao(req.RendaTributavel);
             var aliquota = ClassificarAliquota(req.RendaTributavel);
-            var impostoRenda = CalcularImposto(req.RendaTributavel, aliquota);
-            var deducaoPermitida = DefinirDeducaoPermitida(deducao);
-            var impostoPagar = CalcularImpostoPagar(impostoRenda, deducaoPermitida);
+            var calculoImposto = CalcularImposto(req.RendaTributavel, aliquota);
+            var deducaoPermitida = DefinirDeducaoPermitida(limiteDeducao);
+            var impostoPagar = CalcularImpostoPagar(calculoImposto, deducaoPermitida);
             
 
             string mensagem = DefinirMensagemResposta(req, impostoPagar);
@@ -106,7 +106,7 @@ namespace API.Controllers {
         //O imposto a pagar passará a ser, impostocalculado-deducaopermitida
 
         private double DefinirDeducaoPermitida(double deducao) {
-            double limiteDeducao = 884.96;
+            double limiteDeducao = 00;
             double deducaoPermitida = 00;
             if (deducao < limiteDeducao) {
                 deducaoPermitida = deducao;
@@ -115,8 +115,8 @@ namespace API.Controllers {
             return limiteDeducao;
         }
 
-        private double CalcularImpostoPagar(double deducaoPermitida, double impostoRenda) {
-            return (impostoRenda -= deducaoPermitida);
+        private double CalcularImpostoPagar(double deducaoPermitida, double calculoImposto) {
+            return (calculoImposto - deducaoPermitida);
         }
 
 
